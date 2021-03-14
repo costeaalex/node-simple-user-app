@@ -1,0 +1,22 @@
+version: "3"
+services:
+    nodeserver:
+        build:
+            context: ./app
+        ports:
+            - "5000:5000"
+        depends_on:
+            - "mongo"
+    nginx:
+        restart: always
+        build:
+            context: ./nginx
+        ports:
+            - "80:80"
+    mongo:
+        ports:
+            - "27017:27017"
+        image: mongo:4.1.8-xenial
+        volumes:
+            - ./data/mongo:/data/db
+   
